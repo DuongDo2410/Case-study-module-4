@@ -7,7 +7,10 @@ export interface IPost{
     createdate?:string;
     user?:IUser;
     like?:ILike;
-    comment?:IComment
+    comment?:IComment,
+    image?:string,
+    video?:string,
+
 }
 
 const postSchema = new Schema<IPost>({
@@ -28,7 +31,18 @@ const postSchema = new Schema<IPost>({
             type:Schema.Types.ObjectId,
             ref:'Like'
         }
-    ]
+    ],
+    image:[
+        {
+            type:String,
+        }
+    ],
+    video:[
+        {
+            type:String,
+        }
+    ],
+
 },{timestamps:true})
 
 const Post = model<IPost>('Post',postSchema);

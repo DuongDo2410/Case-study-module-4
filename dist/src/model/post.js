@@ -20,7 +20,17 @@ const postSchema = new mongoose_1.Schema({
             type: mongoose_1.Schema.Types.ObjectId,
             ref: 'Like'
         }
-    ]
+    ],
+    image: [
+        {
+            type: String,
+        }
+    ],
+    video: [
+        {
+            type: String,
+        }
+    ],
 }, { timestamps: true });
 const Post = (0, mongoose_1.model)('Post', postSchema);
 exports.Post = Post;
