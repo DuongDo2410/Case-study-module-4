@@ -7,15 +7,15 @@ const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const body_parser_1 = __importDefault(require("body-parser"));
-const routes_1 = __importDefault(require("./src/router/routes"));
 const cors_1 = __importDefault(require("cors"));
 const path_1 = __importDefault(require("path"));
+const routes_1 = require("./src/router/routes");
 const app = (0, express_1.default)();
 //middle
 dotenv_1.default.config();
 app.use((0, cors_1.default)());
 // connection
-let DB_URL = process.env.MONGODB_URI ? process.env.MONGODB_URI : "";
+const DB_URL = `${process.env.APP_HOST}://${process.env.DATABASE_HOST}:${process.env.DATABASE_PORT}/${process.env.DATABASE_NAME}`;
 mongoose_1.default.connect(DB_URL).then(() => {
     console.log("DB Connected");
 });
@@ -24,7 +24,7 @@ mongoose_1.default.connection.on("error", (err) => {
 });
 app.use(express_1.default.static(path_1.default.join(__dirname, "../public")));
 app.use(body_parser_1.default.json());
-app.use("", routes_1.default);
+app.use("", routes_1.router);
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
     console.log("sever is running port ", port);
