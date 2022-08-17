@@ -2,6 +2,7 @@ import {NextFunction, Request, Response} from "express";
 import {User} from "../../model/user";
 
 class UserController{
+    //update
     getAllUsers = async (req: Request, res: Response) => {
         let Users = await User.find();
         res.status(200).json(Users);
