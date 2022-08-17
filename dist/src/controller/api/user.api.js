@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const user_1 = require("../../model/user");
 class UserController {
     constructor() {
+        //update
         this.getAllUsers = (req, res) => __awaiter(this, void 0, void 0, function* () {
             let Users = yield user_1.User.find();
             res.status(200).json(Users);

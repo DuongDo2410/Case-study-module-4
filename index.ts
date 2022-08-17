@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 
 app.use("", router);
 
-const port = process.env.PORT || 8000;
+const port = process.env.APP_PORT || 6000;
 app.listen(port, () => {
   console.log("sever is running port ", port);
 });
