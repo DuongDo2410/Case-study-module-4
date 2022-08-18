@@ -9,11 +9,7 @@ exports.commentSchema = new mongoose_1.Schema({
         minlength: 1,
         maxlength: 280,
     },
-    user: {
-        type: mongoose_1.Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    post: {
+    postId: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: "Post"
     }

@@ -6,15 +6,10 @@ export const commentSchema = new Schema({
             minlength: 1,
             maxlength: 280,
         },
-        user:{
-            type:Schema.Types.ObjectId,
-            ref:'User'
-        },
-        post:{
+        postId:{
             type: Schema.Types.ObjectId,
             ref:"Post"
         }
-
     },
     {timestamps:true})
 

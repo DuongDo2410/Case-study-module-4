@@ -19,7 +19,27 @@ class commentController {
             try {
                 let newComment = req.body;
                 newComment = yield comment_1.default.create(newComment);
-                res.status(200).send('successfully added!');
+                res.status(200).send(newComment);
+            }
+            catch (error) {
+                res.status(500).json(error);
+            }
+        });
+        this.updateComment = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let id = req.params.id;
+                let updateComment = yield comment_1.default.findOneAndUpdate({ postId: id }, { $set: req.body });
+                res.status(200).json(updateComment);
+            }
+            catch (error) {
+                res.status(500).json(error);
+            }
+        });
+        this.deleteComment = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let id = req.params.id;
+                let deleteComment = yield comment_1.default.findByIdAndDelete(id);
+                res.status(200).json(deleteComment);
             }
             catch (error) {
                 res.status(500).json(error);

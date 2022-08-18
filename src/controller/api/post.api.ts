@@ -1,17 +1,17 @@
 import Post from '../../model/post';
-import { User } from '../../model/user';
 import { Request, Response } from 'express';
+const validator = require('validator');
 class postController {
     newPost = async (req: Request, res: Response) => {
         try {
             let newPost = req.body;
-            newPost = await new Post(newPost);
-            let newsPost = await newPost.save();
-            if (req.body.user) {
-                const user = User.findById(req.body.user);
-                await user.updateOne({ $push: { posts: newsPost._id } });
+            if (!validator.isEmpty(newPost.text)) {
+                let newsPost = await Post.create(newPost);
+                res.status(200).json(newsPost);
+            } else {
+                res.status(500).json('Please enter something...!')
             }
-            res.status(200).json(newsPost);
+
         } catch (error) {
             res.status(500).json(error);
         }
@@ -21,7 +21,7 @@ class postController {
     getAPost = async (req: Request, res: Response) => {
         try {
             let id = req.params.id;
-            const post = await Post.findById(id).populate("user");
+            const post = await Post.findById(id);
             res.status(200).json(post);
         } catch (error) {
             res.status(500).json(error);
@@ -33,7 +33,7 @@ class postController {
             let id = req.params.id;
             let post = await Post.findById(id);
             await post?.updateOne({ $set: req.body })
-            res.status(200).json("Successfully updated!")
+            res.status(200).json(post)
         } catch (error) {
             res.status(500).json(error);
         }
