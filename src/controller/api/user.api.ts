@@ -3,6 +3,7 @@ import {User} from "../../model/user";
 import {parse} from "path";
 
 class UserController{
+    //update
     getAllUsers = async (req: Request, res: Response) => {
         let Users = await User.find();
         res.status(200).json(Users);
