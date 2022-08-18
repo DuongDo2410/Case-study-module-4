@@ -18,9 +18,9 @@ class postController {
     }
 
     //GET A POST
-    getAPost = async (req: Request, res: Response) => {
+    getAPost = async (req: any, res: Response) => {
         try {
-            let id = req.params.id;
+            let id = req.decoded.id;
             const post = await Post.findById(id).populate("user");
             res.status(200).json(post);
         } catch (error) {
