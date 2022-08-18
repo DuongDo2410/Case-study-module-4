@@ -26,9 +26,13 @@ class AuthController{
                                 if(!validator.isEmail(user.email)){
                                     res.status(404).json('wrong email... please in put email with validator xxx@xxx.xxx')
                                 }else {
-                                    user.password = await bcrypt.hash(user.password, 10);
-                                    user = await User.create(user);
-                                    res.status(201).json(user)
+                                    if(validator.isEmpty(user.name)){
+                                        res.status(404).json('please input name')
+                                    }else {
+                                        user.password = await bcrypt.hash(user.password, 10);
+                                        user = await User.create(user);
+                                        res.status(201).json(user)
+                                    }
                                 }
                             }
                         }else {

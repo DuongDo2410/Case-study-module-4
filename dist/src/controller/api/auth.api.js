@@ -42,9 +42,14 @@ class AuthController {
                                         res.status(404).json('wrong email... please in put email with validator xxx@xxx.xxx');
                                     }
                                     else {
-                                        user.password = yield bcrypt_1.default.hash(user.password, 10);
-                                        user = yield user_1.User.create(user);
-                                        res.status(201).json(user);
+                                        if (validator_1.default.isEmpty(user.name)) {
+                                            res.status(404).json('please input name');
+                                        }
+                                        else {
+                                            user.password = yield bcrypt_1.default.hash(user.password, 10);
+                                            user = yield user_1.User.create(user);
+                                            res.status(201).json(user);
+                                        }
                                     }
                                 }
                             }
