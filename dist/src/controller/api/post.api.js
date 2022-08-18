@@ -13,19 +13,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const post_1 = __importDefault(require("../../model/post"));
-const user_1 = require("../../model/user");
+const validator = require('validator');
 class postController {
     constructor() {
         this.newPost = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let newPost = req.body;
-                newPost = yield new post_1.default(newPost);
-                let newsPost = yield newPost.save();
-                if (req.body.user) {
-                    const user = user_1.User.findById(req.body.user);
-                    yield user.updateOne({ $push: { posts: newsPost._id } });
+                if (!validator.isEmpty(newPost.text)) {
+                    let newsPost = yield post_1.default.create(newPost);
+                    res.status(200).json(newsPost);
                 }
-                res.status(200).json(newsPost);
+                else {
+                    res.status(500).json('Please enter something...!');
+                }
             }
             catch (error) {
                 res.status(500).json(error);
@@ -35,7 +35,7 @@ class postController {
         this.getAPost = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let id = req.params.id;
-                const post = yield post_1.default.findById(id).populate("user");
+                const post = yield post_1.default.findById(id);
                 res.status(200).json(post);
             }
             catch (error) {
@@ -47,7 +47,7 @@ class postController {
                 let id = req.params.id;
                 let post = yield post_1.default.findById(id);
                 yield (post === null || post === void 0 ? void 0 : post.updateOne({ $set: req.body }));
-                res.status(200).json("Successfully updated!");
+                res.status(200).json(post);
             }
             catch (error) {
                 res.status(500).json(error);

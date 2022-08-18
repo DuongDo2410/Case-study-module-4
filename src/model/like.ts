@@ -2,9 +2,9 @@ import{Schema,model} from "mongoose";
 
 const likeSchema = new Schema({
     icon:String,
-    user:{
+    postId:{
         type:Schema.Types.ObjectId,
-        ref:'User'
+        ref:'Post'
     }
 })
 const Like = model('Like',likeSchema);
