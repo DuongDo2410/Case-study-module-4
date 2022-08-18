@@ -4,9 +4,9 @@ exports.Like = void 0;
 const mongoose_1 = require("mongoose");
 const likeSchema = new mongoose_1.Schema({
     icon: String,
-    user: {
+    postId: {
         type: mongoose_1.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'Post'
     }
 });
 const Like = (0, mongoose_1.model)('Like', likeSchema);
