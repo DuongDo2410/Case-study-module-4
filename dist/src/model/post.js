@@ -8,18 +8,6 @@ const postSchema = new mongoose_1.Schema({
         minlength: 1,
         maxlength: 280,
     },
-    comment: [
-        {
-            type: mongoose_1.Schema.Types.ObjectId,
-            ref: 'Comment'
-        }
-    ],
-    like: [
-        {
-            type: mongoose_1.Schema.Types.ObjectId,
-            ref: 'Like'
-        }
-    ],
     image: [
         {
             type: String,
@@ -30,9 +18,12 @@ const postSchema = new mongoose_1.Schema({
             type: String,
         }
     ],
-    user: {
+    userId: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: 'User'
+    },
+    status: {
+        type: String,
     }
 }, { timestamps: true });
 const Post = (0, mongoose_1.model)('Post', postSchema);

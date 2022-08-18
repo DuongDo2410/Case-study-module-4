@@ -27,7 +27,7 @@ app.use(express_1.default.static(path_1.default.join(__dirname, "../public")));
 app.use(body_parser_1.default.json());
 app.use("", routes_1.router);
 app.use(error_1.errorHandler);
-const port = process.env.PORT || 8000;
+const port = process.env.APP_PORT || 8000;
 app.listen(port, () => {
     console.log("sever is running port ", port);
 });

@@ -21,18 +21,6 @@ const userSchema = new mongoose_1.Schema({
     name: String,
     dob: String,
     avatar: String,
-    friends: [
-        {
-            type: mongoose_1.Schema.Types.ObjectId,
-            ref: "User",
-        },
-    ],
-    posts: [
-        {
-            type: mongoose_1.Schema.Types.ObjectId,
-            ref: "Post",
-        },
-    ],
 });
 const User = (0, mongoose_1.model)('User', userSchema);
 exports.User = User;
