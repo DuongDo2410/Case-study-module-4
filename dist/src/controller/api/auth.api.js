@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const validator_1 = __importDefault(require("validator"));
 const user_1 = require("../../model/user");
 const auth_1 = require("../../middleware/auth");
 class AuthController {
@@ -21,9 +22,41 @@ class AuthController {
         this.register = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let user = req.body;
-                user.password = yield bcrypt_1.default.hash(user.password, 10);
-                user = yield user_1.User.create(user);
-                res.status(201).json(user);
+                if (validator_1.default.isEmpty(user.username)) {
+                    res.status(404).json('please input username');
+                }
+                else {
+                    let username = yield user_1.User.findOne({ username: user.username });
+                    if (!username) {
+                        if (validator_1.default.isEmpty(user.password)) {
+                            res.status(404).json('please input password');
+                        }
+                        else {
+                            let email = yield user_1.User.findOne({ email: user.email });
+                            if (!email) {
+                                if (validator_1.default.isEmpty(user.email)) {
+                                    res.status(404).json('please input email');
+                                }
+                                else {
+                                    if (!validator_1.default.isEmail(user.email)) {
+                                        res.status(404).json('wrong email... please in put email with validator xxx@xxx.xxx');
+                                    }
+                                    else {
+                                        user.password = yield bcrypt_1.default.hash(user.password, 10);
+                                        user = yield user_1.User.create(user);
+                                        res.status(201).json(user);
+                                    }
+                                }
+                            }
+                            else {
+                                res.status(200).json('email was exitsted');
+                            }
+                        }
+                    }
+                    else {
+                        res.status(200).json('username was exitsted');
+                    }
+                }
             }
             catch (err) {
                 next(err);

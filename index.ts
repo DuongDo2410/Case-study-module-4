@@ -22,10 +22,14 @@ mongoose.connection.on("error", (err) => {
 });
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(bodyParser.json());
+// app.use(errorHandler);
 
 app.use("", router);
+
 app.use(errorHandler);
 const port = process.env.APP_PORT || 8000;
+
+
 app.listen(port, () => {
   console.log("sever is running port ", port);
 });
