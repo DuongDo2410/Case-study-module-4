@@ -8,7 +8,7 @@ export interface IUser{
     dob?:string;
     avatar?:string;
     friends?:IUser;
-    post?:IPost
+    posts?:IPost
 }
 const userSchema = new Schema<IUser>({
         username: {
@@ -35,7 +35,7 @@ const userSchema = new Schema<IUser>({
                 ref: "User",
             },
         ],
-        post: [
+        posts: [
             {
                 type: Schema.Types.ObjectId,
                 ref: "Post",
