@@ -22,7 +22,7 @@ mongoose.connection.on("error", (err) => {
 });
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(bodyParser.json());
-// app.use(errorHandler);
+app.use(errorHandler);
 
 app.use("", router);
 

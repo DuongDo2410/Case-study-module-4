@@ -32,6 +32,7 @@ class UserController {
                 next(err);
             }
         });
+<<<<<<< HEAD
         // getSingleUserByEmail = async (req:Request,res:Response,next:NextFunction)=>{
         //
         //     let email = req.body.email
@@ -46,6 +47,23 @@ class UserController {
         //         next(err)
         //     }
         // }
+=======
+        this.getSingleUserByUsername = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            let username = req.query.username;
+            try {
+                let user = yield user_1.User.find({ username: username });
+                if (!user) {
+                    res.status(404).json();
+                }
+                else {
+                    res.status(200).json(user);
+                }
+            }
+            catch (err) {
+                next(err);
+            }
+        });
+>>>>>>> quyen
         this.createUser = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let user = req.body;
