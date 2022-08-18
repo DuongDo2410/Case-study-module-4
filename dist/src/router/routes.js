@@ -4,6 +4,8 @@ exports.router = void 0;
 const express_1 = require("express");
 const user_router_1 = require("./user-router");
 const auth_router_1 = require("./auth-router");
+const friend_router_1 = require("./friend-router");
 exports.router = (0, express_1.Router)();
 exports.router.use('/users', user_router_1.userProfileRouter);
 exports.router.use('', auth_router_1.authRouter);
+exports.router.use('', friend_router_1.friendRouter);
