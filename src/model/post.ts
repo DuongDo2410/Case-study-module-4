@@ -1,37 +1,11 @@
 import { Schema, model } from "mongoose";
-import { IUser } from './user';
-import { ILike } from './like';
-import { IComment } from './comment';
-export interface IPost {
-    text?: string;
-    createdate?: string;
-    user?: IUser;
-    like?: ILike;
-    comment?: IComment,
-    image?: string,
-    video?: string,
-
-}
-
-const postSchema = new Schema<IPost>({
+const postSchema = new Schema({
     text: {
         type: String,
         required: true,
         minlength: 1,
         maxlength: 280,
     },
-    comment: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Comment'
-        }
-    ],
-    like: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Like'
-        }
-    ],
     image: [
         {
             type: String,
@@ -42,14 +16,15 @@ const postSchema = new Schema<IPost>({
             type: String,
         }
     ],
-    user: {
+    userId: {
         type: Schema.Types.ObjectId,
         ref: 'User'
+    },
+    status:{
+        type: String,
     }
-
-
 
 }, { timestamps: true })
 
-const Post = model<IPost>('Post', postSchema);
+const Post = model('Post', postSchema);
 export default Post;

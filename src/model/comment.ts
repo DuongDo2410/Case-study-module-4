@@ -1,14 +1,5 @@
 import{Schema,model} from "mongoose";
-import {IUser} from './user';
-
-export interface IComment{
-    text?:string;
-    createdate?:string;
-    user?:IUser,
-    post?:string;
-}
-
-export const commentSchema = new Schema<IComment>({
+export const commentSchema = new Schema({
         text: {
             type: String,
             required: true,
@@ -26,6 +17,8 @@ export const commentSchema = new Schema<IComment>({
 
     },
     {timestamps:true})
-const Comment = model<IComment>('Comment',commentSchema);
+
+const Comment = model('Comment',commentSchema);
 export default Comment;
+
 
