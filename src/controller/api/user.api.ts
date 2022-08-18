@@ -20,6 +20,19 @@ class UserController{
             next(err)
         }
     };
+    getSingleUserByUsername=async (req:Request,res:Response,next:NextFunction)=>{
+        let username = req.query.username;
+        try{
+            let user = await User.find({username:username});
+            if(!user){
+                res.status(404).json();
+            }else {
+                res.status(200).json(user)
+            }
+        }catch (err){
+            next(err)
+        }
+    }
 
     createUser = async (req:Request,res:Response,next:NextFunction)=>{
         try{
