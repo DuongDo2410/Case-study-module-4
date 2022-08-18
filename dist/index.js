@@ -10,6 +10,7 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const cors_1 = __importDefault(require("cors"));
 const path_1 = __importDefault(require("path"));
 const routes_1 = require("./src/router/routes");
+const error_1 = require("./src/middleware/error");
 const app = (0, express_1.default)();
 //middle
 dotenv_1.default.config();
@@ -25,6 +26,7 @@ mongoose_1.default.connection.on("error", (err) => {
 app.use(express_1.default.static(path_1.default.join(__dirname, "../public")));
 app.use(body_parser_1.default.json());
 app.use("", routes_1.router);
+app.use(error_1.errorHandler);
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
     console.log("sever is running port ", port);

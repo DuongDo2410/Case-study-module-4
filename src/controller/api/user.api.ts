@@ -1,5 +1,6 @@
 import {NextFunction, Request, Response} from "express";
 import {User} from "../../model/user";
+import {parse} from "path";
 
 class UserController{
     getAllUsers = async (req: Request, res: Response) => {
@@ -21,6 +22,20 @@ class UserController{
         }
     };
 
+    // getSingleUserByEmail = async (req:Request,res:Response,next:NextFunction)=>{
+    //
+    //     let email = req.body.email
+    //     try{
+    //         let user = await User.findOne({email:email});
+    //         if(!user){
+    //             res.status(404).json();
+    //         }else {
+    //             res.status(200).json(user)
+    //         }
+    //     }catch (err){
+    //         next(err)
+    //     }
+    // }
     createUser = async (req:Request,res:Response,next:NextFunction)=>{
         try{
             let user = req.body;
