@@ -23,7 +23,6 @@ class postController {
                 let newsPost = yield newPost.save();
                 if (req.body.user) {
                     const user = user_1.User.findById(req.body.user);
-                    console.log(user);
                     yield user.updateOne({ $push: { posts: newsPost._id } });
                 }
                 res.status(200).json(newsPost);

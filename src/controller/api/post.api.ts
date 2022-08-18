@@ -9,8 +9,6 @@ class postController {
             let newsPost = await newPost.save();
             if (req.body.user) {
                 const user = User.findById(req.body.user);
-                console.log(user);
-
                 await user.updateOne({ $push: { posts: newsPost._id } });
             }
             res.status(200).json(newsPost);
