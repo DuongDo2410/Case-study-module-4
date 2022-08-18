@@ -18,41 +18,51 @@ const user_1 = require("../../model/user");
 const auth_1 = require("../../middleware/auth");
 class AuthController {
     constructor() {
-        this.register = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            let user = req.body;
-            user.password = yield bcrypt_1.default.hash(user.password, 10);
-            user = yield user_1.User.create(user);
-            res.status(201).json(user);
-        });
-        this.login = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            let loginForm = req.body;
-            let user = yield user_1.User.findOne({
-                username: loginForm.username
-            });
-            if (!user) {
-                res.status(401).json({
-                    message: 'username is not existed'
-                });
+        this.register = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let user = req.body;
+                user.password = yield bcrypt_1.default.hash(user.password, 10);
+                user = yield user_1.User.create(user);
+                res.status(201).json(user);
             }
-            else {
-                let pass = user.password;
-                let comparePassword = yield bcrypt_1.default.compare(loginForm.password, pass);
-                if (!comparePassword) {
+            catch (err) {
+                next(err);
+            }
+        });
+        this.login = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let loginForm = req.body;
+                let user = yield user_1.User.findOne({
+                    username: loginForm.username
+                });
+                if (!user) {
                     res.status(401).json({
-                        message: 'password is wrong'
+                        message: 'username is not existed'
                     });
                 }
                 else {
-                    let payload = {
-                        username: user.username
-                    };
-                    let token = jsonwebtoken_1.default.sign(payload, auth_1.SECRET_KEY, {
-                        expiresIn: 36000
-                    });
-                    res.status(200).json({
-                        token: token
-                    });
+                    let pass = user.password;
+                    let comparePassword = yield bcrypt_1.default.compare(loginForm.password, pass);
+                    if (!comparePassword) {
+                        res.status(401).json({
+                            message: 'password is wrong'
+                        });
+                    }
+                    else {
+                        let payload = {
+                            username: user.username
+                        };
+                        let token = jsonwebtoken_1.default.sign(payload, auth_1.SECRET_KEY, {
+                            expiresIn: 36000
+                        });
+                        res.status(200).json({
+                            token: token
+                        });
+                    }
                 }
+            }
+            catch (err) {
+                next(err);
             }
         });
     }
