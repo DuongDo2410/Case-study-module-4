@@ -8,4 +8,4 @@ userProfileRouter.get('/detail/:id',UserController.getSingleUser);
 userProfileRouter.post('',UserController.createUser);
 userProfileRouter.put('/:id',UserController.updateUser)
 userProfileRouter.get('/username',UserController.getSingleUserByUsername)
-
+//update
