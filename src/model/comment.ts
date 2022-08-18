@@ -1,6 +1,4 @@
 import{Schema,model} from "mongoose";
-
-
 export const commentSchema = new Schema({
         text: {
             type: String,
@@ -8,12 +6,14 @@ export const commentSchema = new Schema({
             minlength: 1,
             maxlength: 280,
         },
-        user:{
-            type:Schema.Types.ObjectId,
-            ref:'User'
+        postId:{
+            type: Schema.Types.ObjectId,
+            ref:"Post"
         }
     },
     {timestamps:true})
+
 const Comment = model('Comment',commentSchema);
-export {Comment};
+export default Comment;
+
 
