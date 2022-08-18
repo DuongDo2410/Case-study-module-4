@@ -33,11 +33,11 @@ class AuthController {
             try {
                 let loginForm = req.body;
                 let user = yield user_1.User.findOne({
-                    username: loginForm.username
+                    username: loginForm.username,
                 });
                 if (!user) {
                     res.status(401).json({
-                        message: 'username is not existed'
+                        message: "username is not existed",
                     });
                 }
                 else {
@@ -45,18 +45,21 @@ class AuthController {
                     let comparePassword = yield bcrypt_1.default.compare(loginForm.password, pass);
                     if (!comparePassword) {
                         res.status(401).json({
-                            message: 'password is wrong'
+                            message: "password is wrong",
                         });
                     }
                     else {
                         let payload = {
-                            username: user.username
+                            id: user._id,
+                            username: user.username,
+                            name: user.name,
+                            avatar: user.avatar,
                         };
                         let token = jsonwebtoken_1.default.sign(payload, auth_1.SECRET_KEY, {
-                            expiresIn: 36000
+                            expiresIn: 36000,
                         });
                         res.status(200).json({
-                            token: token
+                            token: token,
                         });
                     }
                 }
