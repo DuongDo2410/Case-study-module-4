@@ -1,35 +1,55 @@
-import{Schema,model} from "mongoose";
-import {IUser} from './user';
-import {ILike} from './like';
-import {IComment,commentSchema} from './comment';
-export interface IPost{
-    text?:string;
-    createdate?:string;
-    user?:IUser;
-    like?:ILike;
-    comment?:IComment
+import { Schema, model } from "mongoose";
+import { IUser } from './user';
+import { ILike } from './like';
+import { IComment, commentSchema } from './comment';
+export interface IPost {
+    text?: string;
+    createdate?: string;
+    user?: IUser;
+    like?: ILike;
+    comment?: IComment,
+    image?: string,
+    video?: string,
+
 }
 
 const postSchema = new Schema<IPost>({
-    text:{
+    text: {
         type: String,
         required: true,
         minlength: 1,
         maxlength: 280,
     },
-    comment:[
+    comment: [
         {
-            type:Schema.Types.ObjectId,
-            ref:'Comment'
+            type: Schema.Types.ObjectId,
+            ref: 'Comment'
         }
     ],
-    like:[
+    like: [
         {
-            type:Schema.Types.ObjectId,
-            ref:'Like'
+            type: Schema.Types.ObjectId,
+            ref: 'Like'
         }
-    ]
-},{timestamps:true})
+    ],
+    image: [
+        {
+            type: String,
+        }
+    ],
+    video: [
+        {
+            type: String,
+        }
+    ],
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }
 
-const Post = model<IPost>('Post',postSchema);
-export {Post};
+
+
+}, { timestamps: true })
+
+const Post = model<IPost>('Post', postSchema);
+export default Post;

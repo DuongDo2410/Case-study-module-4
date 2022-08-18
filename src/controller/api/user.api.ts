@@ -1,3 +1,4 @@
+
 import {NextFunction, Request, Response} from "express";
 import {User} from "../../model/user";
 import {parse} from "path";
@@ -66,3 +67,4 @@ class UserController{
 
 }
 export default new UserController();
+
