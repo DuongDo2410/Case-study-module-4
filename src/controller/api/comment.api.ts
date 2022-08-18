@@ -5,10 +5,28 @@ class commentController {
        try {
         let newComment = req.body;
         newComment= await Comment.create(newComment);
-        res.status(200).send('successfully added!');
+        res.status(200).send(newComment);
        } catch (error) {
         res.status(500).json(error);
        }
+    }
+    updateComment = async (req:Request, res:Response) => {
+        try {
+            let id = req.params.id;
+            let updateComment = await Comment.findOneAndUpdate({postId:id},{$set:req.body});
+            res.status(200).json(updateComment);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    };
+    deleteComment = async (req:Request, res:Response) => {
+        try {
+            let id = req.params.id;
+            let deleteComment = await Comment.findByIdAndDelete(id);
+            res.status(200).json(deleteComment);
+        } catch (error) {
+            res.status(500).json(error);
+        }
     }
 }
 

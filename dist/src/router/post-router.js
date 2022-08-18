@@ -4,13 +4,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const post_api_1 = __importDefault(require("../controller/api/post.api"));
-const router = require('express').Router();
+const comment_router_1 = __importDefault(require("./comment-router"));
+const routerPost = require('express').Router();
+//COMMENT ROUTER
+routerPost.use('/comments', comment_router_1.default);
 //ADD POST
-router.post('', post_api_1.default.newPost);
+routerPost.post('', post_api_1.default.newPost);
 //UPDATE POST
-router.put('/:id', post_api_1.default.updatePost);
+routerPost.put('/:id', post_api_1.default.updatePost);
 //GET A POST
-router.get('/:id', post_api_1.default.getAPost);
+routerPost.get('/:id', post_api_1.default.getAPost);
 //DELETE POST
-router.delete('/:id', post_api_1.default.deleteAPost);
-exports.default = router;
+routerPost.delete('/:id', post_api_1.default.deleteAPost);
+exports.default = routerPost;

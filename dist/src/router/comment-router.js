@@ -7,4 +7,8 @@ const comment_api_1 = __importDefault(require("../controller/api/comment.api"));
 const routerCommnet = require('express').Router();
 //  ADD COMMENT
 routerCommnet.post('/:id', comment_api_1.default.addComment);
+//UPDATE COMMENT
+routerCommnet.put('/:id', comment_api_1.default.updateComment);
+//DELETE COMMENT
+routerCommnet.delete('/:id', comment_api_1.default.deleteComment);
 exports.default = routerCommnet;

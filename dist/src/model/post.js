@@ -4,7 +4,7 @@ const mongoose_1 = require("mongoose");
 const postSchema = new mongoose_1.Schema({
     text: {
         type: String,
-        required: true,
+        // required: true,
         minlength: 1,
         maxlength: 280,
     },
