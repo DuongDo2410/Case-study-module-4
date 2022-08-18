@@ -1,1 +1,1 @@
-E11000 duplicate key error collection: phakebook.users index: username_1 dup key: { username: "thangnv1" }
+Unexpected string in JSON at position 33

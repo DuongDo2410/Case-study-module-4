@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
 import { IUser } from './user';
 import { ILike } from './like';
-import { IComment, commentSchema } from './comment';
+import { IComment } from './comment';
 export interface IPost {
     text?: string;
     createdate?: string;
