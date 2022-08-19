@@ -1,7 +1,6 @@
 import{Request, Response } from 'express';
 import postController from '../controller/api/post.api';
 // import routerCommnet from './comment-router';
-
 import routerCommnet from './comment-router';
 import routerLike from './like-router';
 import verifyToken from '../services/verifyJWT';

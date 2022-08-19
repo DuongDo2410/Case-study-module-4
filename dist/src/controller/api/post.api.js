@@ -24,7 +24,7 @@ class postController {
                     res.status(200).json(newsPost);
                 }
                 else {
-                    res.status(500).json('Please enter something...!');
+                    res.status(500).json("Please enter something...!");
                 }
             }
             catch (error) {
@@ -32,10 +32,10 @@ class postController {
             }
         });
         //GET A POST
-        this.getPost = (req, res) => __awaiter(this, void 0, void 0, function* () {
+        this.getAPost = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let id = req.params.id;
-                const post = yield post_1.default.find({ userId: id });
+                const post = yield post_1.default.findById(id).populate("user");
                 res.status(200).json(post);
             }
             catch (error) {
@@ -63,6 +63,17 @@ class postController {
                 res.status(500).json(error);
             }
         });
+        //GET A POST
+        this.getPost = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let id = req.params.id;
+                const post = yield post_1.default.find({ userId: id });
+                res.status(200).json(post);
+            }
+            catch (error) {
+                res.status(500).json(error);
+            }
+        });
         //LIKE POST
         this.likeAPost = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
@@ -79,4 +90,4 @@ class postController {
         });
     }
 }
-exports.default = new postController;
+exports.default = new postController();

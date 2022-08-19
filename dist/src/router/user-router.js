@@ -12,3 +12,4 @@ exports.userProfileRouter.get('/detail/:id', user_api_1.default.getSingleUser);
 exports.userProfileRouter.post('', user_api_1.default.createUser);
 exports.userProfileRouter.put('/:id', user_api_1.default.updateUser);
 exports.userProfileRouter.get('/username', user_api_1.default.getSingleUserByUsername);
+//update
