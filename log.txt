@@ -1,1 +1,1 @@
-Unexpected string in JSON at position 24
+Cannot read properties of undefined (reading 'split')

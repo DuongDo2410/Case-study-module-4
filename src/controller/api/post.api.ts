@@ -1,5 +1,6 @@
+import { User } from '../../model/user';
 import Post from '../../model/post';
-import { Request, Response } from 'express';
+import { Request, response, Response } from 'express';
 const validator = require('validator');
 class postController {
     newPost = async (req: Request, res: Response) => {
@@ -18,10 +19,10 @@ class postController {
     }
 
     //GET A POST
-    getAPost = async (req: Request, res: Response) => {
+    getPost = async (req: Request, res: Response) => {
         try {
             let id = req.params.id;
-            const post = await Post.findById(id);
+            const post = await Post.find({ userId: id });
             res.status(200).json(post);
         } catch (error) {
             res.status(500).json(error);
@@ -46,6 +47,20 @@ class postController {
         } catch (error) {
             res.status(500).json(error);
 
+        }
+    };
+
+    //LIKE POST
+    likeAPost = async (req: Request, res: Response) => {
+        try {
+            let id = req.params.id;
+            console.log(id);
+            let like = await Post.findOne({_id:id});
+            await like?.updateOne({$pull:like});
+            console.log(like);
+            res.status(200).json(like);
+        } catch (error) {
+            res.status(500).json(error);
         }
     };
 }

@@ -24,8 +24,8 @@ const auth = (req, res, next) => {
                     });
                 }
                 else {
-                    req.decoded = data;
-                    next();
+                    return req.decoded = data;
+                    // next()
                 }
             });
         }
@@ -37,3 +37,4 @@ const auth = (req, res, next) => {
     }
 };
 exports.auth = auth;
+exports.default = { auth: exports.auth };

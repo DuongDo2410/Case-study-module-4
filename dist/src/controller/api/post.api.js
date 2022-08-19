@@ -32,10 +32,10 @@ class postController {
             }
         });
         //GET A POST
-        this.getAPost = (req, res) => __awaiter(this, void 0, void 0, function* () {
+        this.getPost = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let id = req.params.id;
-                const post = yield post_1.default.findById(id);
+                const post = yield post_1.default.find({ userId: id });
                 res.status(200).json(post);
             }
             catch (error) {
@@ -58,6 +58,20 @@ class postController {
                 let id = req.params.id;
                 yield post_1.default.findByIdAndDelete(id);
                 res.status(200).json(" Delete successfully!");
+            }
+            catch (error) {
+                res.status(500).json(error);
+            }
+        });
+        //LIKE POST
+        this.likeAPost = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let id = req.params.id;
+                console.log(id);
+                let like = yield post_1.default.findOne({ _id: id });
+                yield (like === null || like === void 0 ? void 0 : like.updateOne({ $pull: like }));
+                console.log(like);
+                res.status(200).json(like);
             }
             catch (error) {
                 res.status(500).json(error);
