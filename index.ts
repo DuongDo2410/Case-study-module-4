@@ -28,8 +28,6 @@ app.use("", router);
 
 app.use(errorHandler);
 const port = process.env.APP_PORT || 8000;
-
-
 app.listen(port, () => {
   console.log("sever is running port ", port);
 });

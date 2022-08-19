@@ -6,5 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.friendRouter = void 0;
 const express_1 = require("express");
 const friend_api_1 = __importDefault(require("../controller/api/friend.api"));
+const auth_1 = require("../middleware/auth");
 exports.friendRouter = (0, express_1.Router)();
-exports.friendRouter.post('/friend/:id', friend_api_1.default.addFriend);
+exports.friendRouter.use(auth_1.auth);
+exports.friendRouter.post("/friend/:id", friend_api_1.default.addFriend);

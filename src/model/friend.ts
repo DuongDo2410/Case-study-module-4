@@ -1,14 +1,18 @@
-import {Schema,model} from "mongoose";
+import { Schema, model } from "mongoose";
+
 const friendSchema = new Schema({
-    idUser:{
-        type: Schema.Types.ObjectId,
-        ref: "User",
-    },
-    idFriend:{
-        type: Schema.Types.ObjectId,
-        ref: "User",
-    },
-    status:String,
-})
-const Friend = model('Friend',friendSchema);
-export {Friend}
+  iduser: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
+  idfriend: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
+  status: {
+    type: String,
+  },
+});
+
+const Friend = model("Friend", friendSchema);
+export { Friend };
