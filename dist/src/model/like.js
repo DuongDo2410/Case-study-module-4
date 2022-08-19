@@ -1,13 +1,13 @@
 "use strict";
-// import{Schema,model} from "mongoose";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Like = void 0;
-const likeSchema = new Schema({
+const mongoose_1 = require("mongoose");
+const likeSchema = new mongoose_1.Schema({
     icon: String,
     postId: {
-        type: Schema.Types.ObjectId,
-        ref: 'Post'
-    }
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: "Post",
+    },
 });
-const Like = model('Like', likeSchema);
+const Like = (0, mongoose_1.model)("Like", likeSchema);
 exports.Like = Like;

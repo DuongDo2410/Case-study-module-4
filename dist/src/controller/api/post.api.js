@@ -13,12 +13,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const post_1 = __importDefault(require("../../model/post"));
-const validator = require('validator');
+const validator = require("validator");
 class postController {
     constructor() {
         this.newPost = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let newPost = req.body;
+                newPost.userId = req.decoded.id;
                 if (!validator.isEmpty(newPost.text)) {
                     let newsPost = yield post_1.default.create(newPost);
                     res.status(200).json(newsPost);
@@ -26,6 +27,17 @@ class postController {
                 else {
                     res.status(500).json("Please enter something...!");
                 }
+            }
+            catch (error) {
+                res.status(500).json(error);
+            }
+        });
+        this.getPostByUserId = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let userId = req.decoded.id;
+                console.log(userId);
+                const post = yield post_1.default.find({ userId: userId });
+                res.status(200).json(post);
             }
             catch (error) {
                 res.status(500).json(error);
