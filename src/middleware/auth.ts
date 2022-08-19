@@ -17,8 +17,8 @@ export const auth = (req:any,res:any,next:any)=>{
                         message:'you are anonymous'
                     })
                 }else {
-                    req.decoded = data;
-                    next()
+                  return req.decoded = data;
+                    // next()
                 }
             })
         }
@@ -27,5 +27,6 @@ export const auth = (req:any,res:any,next:any)=>{
             message:'you are anonymous'
         })
     }
-
 }
+
+export default {auth};

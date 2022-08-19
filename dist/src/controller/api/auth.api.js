@@ -80,7 +80,8 @@ class AuthController {
                 }
                 else {
                     let pass = user.password;
-                    let comparePassword = yield bcrypt_1.default.compare(loginForm.password, pass);
+                    // let comparePassword = await bcrypt.compare(loginForm.password,pass);
+                    let comparePassword = pass == loginForm.password;
                     if (!comparePassword) {
                         res.status(401).json({
                             message: 'password is wrong'
@@ -88,6 +89,7 @@ class AuthController {
                     }
                     else {
                         let payload = {
+                            id: user._id,
                             username: user.username
                         };
                         let token = jsonwebtoken_1.default.sign(payload, auth_1.SECRET_KEY, {
