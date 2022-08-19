@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf dist && tsc -p tsconfig.build.json",
-    "start:dev": "tsc-watch -p tsconfig.build.json --onSuccess \"node dist/index.js\"",
-    "start": "tsc && node dist/index.js"
+    "start": "tsc-watch -p tsconfig.build.json --onSuccess \"node dist/index.js\"",
+    "start1": "tsc && node dist/index.js"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
     "@types/express-session": "^1.17.5",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/mongoose": "^5.11.97",
+    "@types/validator": "^13.7.5",
     "rimraf": "^3.0.2",
     "tsc": "^2.0.4",
     "tsc-watch": "^5.0.3",
@@ -32,7 +33,7 @@
     "express": "^4.18.1",
     "express-session": "^1.17.3",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.5.1",
+    "mongoose": "^6.5.2",
     "path": "^0.12.7",
     "validator": "^13.7.0"
   }

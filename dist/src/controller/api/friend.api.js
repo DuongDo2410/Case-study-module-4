@@ -1,4 +1,5 @@
 "use strict";
+<<<<<<< HEAD
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -21,6 +22,16 @@ class FriendController {
             yield friend_1.Friend.create(friend);
             res.status(200).json();
         });
+=======
+Object.defineProperty(exports, "__esModule", { value: true });
+class FriendController {
+    constructor() {
+        this.addFriend = (req, res, next) => {
+            let idFriend = req.params.id;
+            console.log(idFriend);
+            console.log(req.decoded);
+        };
+>>>>>>> dev
     }
 }
 exports.default = new FriendController();

@@ -1,16 +1,5 @@
 import{Schema,model} from "mongoose";
-import {IPost} from "./post";
-export interface IUser{
-    username:string;
-    email?:string;
-    password?:string;
-    name?:string;
-    dob?:string;
-    avatar?:string;
-    friends?:IUser;
-    post?:IPost
-}
-const userSchema = new Schema<IUser>({
+const userSchema = new Schema({
         username: {
             type: String,
             unique: true,
@@ -29,20 +18,8 @@ const userSchema = new Schema<IUser>({
         name:String,
         dob:String,
         avatar:String,
-        friends: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: "User",
-            },
-        ],
-        post: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: "Post",
-            },
-        ],
     }
 )
 
-const User = model<IUser>('User',userSchema);
+const User = model('User',userSchema);
 export {User};
