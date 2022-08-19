@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const post_1 = __importDefault(require("../../model/post"));
-const validator = require("validator");
+const validator = require('validator');
 class postController {
     constructor() {
         this.newPost = (req, res) => __awaiter(this, void 0, void 0, function* () {
