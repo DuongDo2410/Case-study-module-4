@@ -47,4 +47,4 @@ class commentController {
         });
     }
 }
-exports.default = new commentController;
+exports.default = new commentController();

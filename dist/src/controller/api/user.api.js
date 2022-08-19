@@ -47,6 +47,21 @@ class UserController {
                 next(err);
             }
         });
+        this.getUserToLocalStorage = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let id = req.decoded.id;
+                let user = yield user_1.User.findById(id);
+                if (!user) {
+                    res.status(404).json();
+                }
+                else {
+                    res.status(200).json(user);
+                }
+            }
+            catch (err) {
+                next(err);
+            }
+        });
         // getSingleUserByEmail = async (req:Request,res:Response,next:NextFunction)=>{
         //
         //     let email = req.body.email

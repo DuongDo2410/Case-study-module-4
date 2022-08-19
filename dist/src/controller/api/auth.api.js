@@ -23,27 +23,29 @@ class AuthController {
             try {
                 let user = req.body;
                 if (validator_1.default.isEmpty(user.username)) {
-                    res.status(404).json('please input username');
+                    res.status(404).json("please input username");
                 }
                 else {
                     let username = yield user_1.User.findOne({ username: user.username });
                     if (!username) {
                         if (validator_1.default.isEmpty(user.password)) {
-                            res.status(404).json('please input password');
+                            res.status(404).json("please input password");
                         }
                         else {
                             let email = yield user_1.User.findOne({ email: user.email });
                             if (!email) {
                                 if (validator_1.default.isEmpty(user.email)) {
-                                    res.status(404).json('please input email');
+                                    res.status(404).json("please input email");
                                 }
                                 else {
                                     if (!validator_1.default.isEmail(user.email)) {
-                                        res.status(404).json('wrong email... please in put email with validator xxx@xxx.xxx');
+                                        res
+                                            .status(404)
+                                            .json("wrong email... please in put email with validator xxx@xxx.xxx");
                                     }
                                     else {
                                         if (validator_1.default.isEmpty(user.name)) {
-                                            res.status(404).json('please input name');
+                                            res.status(404).json("please input name");
                                         }
                                         else {
                                             user.password = yield bcrypt_1.default.hash(user.password, 10);
@@ -54,12 +56,12 @@ class AuthController {
                                 }
                             }
                             else {
-                                res.status(200).json('email was exitsted');
+                                res.status(200).json("email was exitsted");
                             }
                         }
                     }
                     else {
-                        res.status(200).json('username was exitsted');
+                        res.status(200).json("username was exitsted");
                     }
                 }
             }
@@ -90,8 +92,6 @@ class AuthController {
                         let payload = {
                             id: user._id,
                             username: user.username,
-                            name: user.name,
-                            avatar: user.avatar,
                         };
                         let token = jsonwebtoken_1.default.sign(payload, auth_1.SECRET_KEY, {
                             expiresIn: 36000,

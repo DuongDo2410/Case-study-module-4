@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const post_1 = __importDefault(require("../../model/post"));
-const validator = require('validator');
+const validator = require("validator");
 class postController {
     constructor() {
         this.newPost = (req, res) => __awaiter(this, void 0, void 0, function* () {
@@ -24,7 +24,7 @@ class postController {
                     res.status(200).json(newsPost);
                 }
                 else {
-                    res.status(500).json('Please enter something...!');
+                    res.status(500).json("Please enter something...!");
                 }
             }
             catch (error) {
@@ -35,7 +35,7 @@ class postController {
         this.getAPost = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let id = req.params.id;
-                const post = yield post_1.default.findById(id);
+                const post = yield post_1.default.findById(id).populate("user");
                 res.status(200).json(post);
             }
             catch (error) {
@@ -65,4 +65,4 @@ class postController {
         });
     }
 }
-exports.default = new postController;
+exports.default = new postController();

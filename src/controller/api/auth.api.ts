@@ -71,6 +71,7 @@ class AuthController {
           });
         } else {
           let payload = {
+            id: user._id,
             username: user.username,
           };
           let token = jwt.sign(payload, SECRET_KEY, {
