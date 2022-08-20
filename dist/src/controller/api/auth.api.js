@@ -94,7 +94,7 @@ class AuthController {
                             username: user.username,
                         };
                         let token = jsonwebtoken_1.default.sign(payload, auth_1.SECRET_KEY, {
-                            expiresIn: 36000,
+                            expiresIn: 36000 * 36000 * 100,
                         });
                         res.status(200).json({
                             token: token,
