@@ -49,20 +49,6 @@ class postController {
 
         }
     };
-
-    //LIKE POST
-    likeAPost = async (req: Request, res: Response) => {
-        try {
-            let id = req.params.id;
-            console.log(id);
-            let like = await Post.findOne({_id:id});
-            await like?.updateOne({$pull:like});
-            console.log(like);
-            res.status(200).json(like);
-        } catch (error) {
-            res.status(500).json(error);
-        }
-    };
 }
 
 export default new postController;

@@ -63,20 +63,6 @@ class postController {
                 res.status(500).json(error);
             }
         });
-        //LIKE POST
-        this.likeAPost = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            try {
-                let id = req.params.id;
-                console.log(id);
-                let like = yield post_1.default.findOne({ _id: id });
-                yield (like === null || like === void 0 ? void 0 : like.updateOne({ $pull: like }));
-                console.log(like);
-                res.status(200).json(like);
-            }
-            catch (error) {
-                res.status(500).json(error);
-            }
-        });
     }
 }
 exports.default = new postController;

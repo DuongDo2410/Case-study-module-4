@@ -18,7 +18,7 @@ class commentController {
         this.addComment = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let newComment = req.body;
-                newComment = yield comment_1.default.create(newComment);
+                newComment.userId = yield comment_1.default.create(newComment);
                 res.status(200).send(newComment);
             }
             catch (error) {
@@ -28,7 +28,7 @@ class commentController {
         this.updateComment = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let id = req.params.id;
-                let updateComment = yield comment_1.default.findOneAndUpdate({ postId: id }, { $set: req.body });
+                let updateComment = yield comment_1.default.findOneAndUpdate({ id: id }, { $set: req.body });
                 res.status(200).json(updateComment);
             }
             catch (error) {

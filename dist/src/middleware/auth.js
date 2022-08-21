@@ -24,8 +24,8 @@ const auth = (req, res, next) => {
                     });
                 }
                 else {
-                    return req.decoded = data;
-                    // next()
+                    req.decoded = data;
+                    next();
                 }
             });
         }
