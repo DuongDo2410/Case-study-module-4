@@ -1,3 +1,4 @@
+
 import { friendRouter } from "./friend-router";
 import { Router } from "express";
 import { userProfileRouter } from "./user-router";
@@ -10,3 +11,18 @@ router.use("/users", userProfileRouter);
 router.use("/posts", routerPost);
 router.use("", authRouter);
 router.use("", friendRouter);
+
+import routerLike from "./like-router";
+import routerCommnet from "./comment-router";
+
+
+
+
+
+//LIKE ROUTER
+router.use('/likes',routerLike);
+
+//COMMENT ROUTER
+router.use('/comments',routerCommnet)
+
+

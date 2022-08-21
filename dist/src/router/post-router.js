@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const post_api_1 = __importDefault(require("../controller/api/post.api"));
+<<<<<<< HEAD
 const auth_1 = require("../middleware/auth");
 const routerPost = (0, express_1.Router)();
 //COMMENT ROUTER
@@ -12,6 +13,9 @@ const routerPost = (0, express_1.Router)();
 //LIKE ROUTER
 // routerPost.use("/likes", routerLike);
 routerPost.get("/getpost", auth_1.auth, post_api_1.default.getPostByUserId);
+=======
+const routerPost = require('express').Router();
+>>>>>>> thang
 //ADD POST
 routerPost.post("", auth_1.auth, post_api_1.default.newPost);
 //UPDATE POST
@@ -19,5 +23,9 @@ routerPost.put("/:id", auth_1.auth, post_api_1.default.updatePost);
 //DELETE POST
 routerPost.delete("/:id", auth_1.auth, post_api_1.default.deleteAPost);
 //GET POST
+<<<<<<< HEAD
 routerPost.get("/:id", post_api_1.default.getPost);
+=======
+routerPost.get('/:id', post_api_1.default.getPost);
+>>>>>>> thang
 exports.default = routerPost;

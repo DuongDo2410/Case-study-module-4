@@ -1,8 +1,12 @@
+import { Router } from 'express';
+import { auth } from './../middleware/auth';
 import commentController from "../controller/api/comment.api";
-const routerCommnet = require('express').Router();
+export const routerCommnet = Router();
+
 
 //  ADD COMMENT
-routerCommnet.post('/:id',commentController.addComment );
+routerCommnet.use(auth)
+routerCommnet.post('',commentController.addComment);
 
 //UPDATE COMMENT
 routerCommnet.put('/:id',commentController.updateComment );

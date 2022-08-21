@@ -9,11 +9,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const like_1 = require("../../model/like");
 class likeController {
     constructor() {
         this.like = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                // console.log(like);
+                let userId = req.decoded.id;
+                console.log(userId);
+                let like = yield like_1.Like.findOne(userId);
+                console.log(like);
+                yield (like === null || like === void 0 ? void 0 : like.updateOne({ $set: userId }));
+                res.status(200).json(like);
             }
             catch (error) {
                 res.status(500).json(error);

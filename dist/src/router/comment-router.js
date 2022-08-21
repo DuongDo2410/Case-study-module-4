@@ -3,12 +3,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.routerCommnet = void 0;
+const express_1 = require("express");
+const auth_1 = require("./../middleware/auth");
 const comment_api_1 = __importDefault(require("../controller/api/comment.api"));
-const routerCommnet = require('express').Router();
+exports.routerCommnet = (0, express_1.Router)();
 //  ADD COMMENT
-routerCommnet.post('/:id', comment_api_1.default.addComment);
+exports.routerCommnet.use(auth_1.auth);
+exports.routerCommnet.post('', comment_api_1.default.addComment);
 //UPDATE COMMENT
-routerCommnet.put('/:id', comment_api_1.default.updateComment);
+exports.routerCommnet.put('/:id', comment_api_1.default.updateComment);
 //DELETE COMMENT
-routerCommnet.delete('/:id', comment_api_1.default.deleteComment);
-exports.default = routerCommnet;
+exports.routerCommnet.delete('/:id', comment_api_1.default.deleteComment);
+exports.default = exports.routerCommnet;

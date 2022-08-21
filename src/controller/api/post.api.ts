@@ -24,7 +24,7 @@ class postController {
     try {
       let userId = req.decoded.id;
       console.log(userId)
-      const post = await Post.find({userId:userId});
+      const post = await Post.find({ userId: userId });
       res.status(200).json(post);
     } catch (error) {
       res.status(500).json(error);
@@ -85,6 +85,8 @@ class postController {
       res.status(500).json(error);
     }
   };
+
 }
+
 
 export default new postController();
