@@ -32,13 +32,14 @@ class likeController {
                         if (statusUserLiked) {
                             // DELETE
                             listUserLike.splice(index, 1);
+                            yield like.save();
                             res.status(200).json('UnLike successfully');
                         }
                         else {
                             like.userId.push(idUserLike);
+                            yield like.save();
                             res.status(200).json('Like successfully');
                         }
-                        yield like.save();
                     }
                     let count = listUserLike.length;
                     res.status(200).json(count);
