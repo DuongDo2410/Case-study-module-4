@@ -20,9 +20,7 @@ class likeController {
                             index = i;
                             break;
                         }
-
                     }
-
                     if (statusUserLiked) {
                         // DELETE
                         listUserLike.splice(index, 1);
