@@ -5,6 +5,10 @@ import { userProfileRouter } from "./user-router";
 import { authRouter } from "./auth-router";
 import commentController from "./comment-router";
 import routerPost from "./post-router";
+import routerLike from "./like-router";
+import routerCommnet from "./comment-router";
+
+
 export const router = Router();
 
 router.use("/users", userProfileRouter);
@@ -12,8 +16,7 @@ router.use("/posts", routerPost);
 router.use("", authRouter);
 router.use("", friendRouter);
 
-import routerLike from "./like-router";
-import routerCommnet from "./comment-router";
+
 
 
 

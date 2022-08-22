@@ -8,5 +8,5 @@ const auth_1 = require("./../middleware/auth");
 const like_api_1 = __importDefault(require("../controller/api/like.api"));
 const routerLike = require('express').Router();
 //LIKE POST
-routerLike.post('/totalLike', auth_1.auth, like_api_1.default.like);
+routerLike.post('/:id', auth_1.auth, like_api_1.default.like);
 exports.default = routerLike;

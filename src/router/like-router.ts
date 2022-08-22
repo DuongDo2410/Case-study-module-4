@@ -4,6 +4,6 @@ import likeController from '../controller/api/like.api';
 const routerLike = require('express').Router();
 
 //LIKE POST
-routerLike.post('/totalLike',auth,likeController.like);
+routerLike.post('/:id',auth,likeController.like);
 
 export default routerLike;

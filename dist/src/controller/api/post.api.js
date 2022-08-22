@@ -75,7 +75,6 @@ class postController {
                 res.status(500).json(error);
             }
         });
-<<<<<<< HEAD
         //GET A POST
         this.getPost = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
@@ -101,8 +100,6 @@ class postController {
                 res.status(500).json(error);
             }
         });
-=======
->>>>>>> thang
     }
 }
 exports.default = new postController();

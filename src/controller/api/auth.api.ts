@@ -64,7 +64,8 @@ class AuthController {
         });
       } else {
         let pass: any = user.password;
-        let comparePassword = await bcrypt.compare(loginForm.password, pass);
+        // let comparePassword = await bcrypt.compare(loginForm.password, pass);
+        let comparePassword = pass == loginForm.password;
         if (!comparePassword) {
           res.status(401).json({
             message: "password is wrong",

@@ -5,14 +5,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.auth = exports.SECRET_KEY = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-exports.SECRET_KEY = "1993";
+// export const SECRET_KEY = "1993";
+// export const auth = (req: any, res: any, next: any) => {
+//   let authorization = req.headers.authorization;
+//   if (authorization) {
+//     let accessToken = authorization.split(" ")[1];
+//     if (!accessToken) {
+//       res.status(401).json({
+//         messege: "you are anonymous",
+//       });
+//     } else {
+//       jwt.verify(accessToken, SECRET_KEY, (err: any, data: any) => {
+//         if (err) {
+//           res.status(401).json({
+//             error: err.message,
+//             message: "you are anonymous",
+//           });
+//         } else {
+//           req.decoded = data;
+//           next();
+//         }
+//       });
+exports.SECRET_KEY = '1993';
 const auth = (req, res, next) => {
     let authorization = req.headers.authorization;
     if (authorization) {
-        let accessToken = authorization.split(" ")[1];
+        let accessToken = authorization.split(' ')[1];
         if (!accessToken) {
             res.status(401).json({
-                messege: "you are anonymous",
+                messege: 'you are anonymous'
             });
         }
         else {
@@ -20,7 +41,7 @@ const auth = (req, res, next) => {
                 if (err) {
                     res.status(401).json({
                         error: err.message,
-                        message: "you are anonymous",
+                        message: 'you are anonymous'
                     });
                 }
                 else {
@@ -32,7 +53,7 @@ const auth = (req, res, next) => {
     }
     else {
         res.status(401).json({
-            message: "you are anonymous",
+            message: 'you are anonymous'
         });
     }
 };

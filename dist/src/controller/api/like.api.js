@@ -9,20 +9,51 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// import Post from 'src/model/post';
 const like_1 = require("../../model/like");
 class likeController {
-    constructor() {
-        this.like = (req, res) => __awaiter(this, void 0, void 0, function* () {
+    like(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
             try {
-                let userId = req.decoded.id;
-                console.log(userId);
-                let like = yield like_1.Like.findOne(userId);
-                console.log(like);
-                yield (like === null || like === void 0 ? void 0 : like.updateOne({ $set: userId }));
-                res.status(200).json(like);
+                const like = yield like_1.Like.findOne({ postId: req.params.id }).populate('userId');
+                if (like) {
+                    let listUserLike = like.userId;
+                    let idUserLike = req.decoded.id;
+                    let index = -1;
+                    if (listUserLike) {
+                        let statusUserLiked = false;
+                        for (let i = 0; i < listUserLike.length; i++) {
+                            if (listUserLike[i]._id == idUserLike) {
+                                statusUserLiked = true;
+                                index = i;
+                                break;
+                            }
+                        }
+                        if (statusUserLiked) {
+                            // DELETE
+                            listUserLike.splice(index, 1);
+                            res.status(200).json('UnLike successfully');
+                        }
+                        else {
+                            like.userId.push(idUserLike);
+                            res.status(200).json('Like successfully');
+                        }
+                        yield like.save();
+                    }
+                    let count = listUserLike.length;
+                    res.status(200).json(count);
+                }
+                else {
+                    let like = {
+                        userId: req.decoded.id,
+                        postId: req.params.id
+                    };
+                    yield like_1.Like.create(like);
+                    return res.status(200).json('Like successfully created');
+                }
             }
             catch (error) {
-                res.status(500).json(error);
+                res.status(500).json(error.message);
             }
         });
     }

@@ -85,7 +85,6 @@ class postController {
       res.status(500).json(error);
     }
   };
-
 }
 
 
