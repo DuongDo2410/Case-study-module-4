@@ -20,28 +20,36 @@ class likeController {
                     let listUserLike = like.userId;
                     let idUserLike = req.decoded.id;
                     let index = -1;
-                    if (listUserLike) {
-                        let statusUserLiked = false;
-                        for (let i = 0; i < listUserLike.length; i++) {
-                            if (listUserLike[i]._id == idUserLike) {
-                                statusUserLiked = true;
-                                index = i;
-                                break;
+                    try {
+                        if (listUserLike) {
+                            let statusUserLiked = false;
+                            for (let i = 0; i < listUserLike.length; i++) {
+                                if (listUserLike[i]._id == idUserLike) {
+                                    statusUserLiked = true;
+                                    index = i;
+                                    break;
+                                }
+                            }
+                            try {
+                                if (statusUserLiked) {
+                                    // DELETE
+                                    listUserLike.splice(index, 1);
+                                    res.status(200).json({ message: 'UnLike successfully', countLike: listUserLike.length });
+                                }
+                                else {
+                                    like.userId.push(idUserLike);
+                                    res.status(200).json({ message: 'Like successfully', countLike: listUserLike.length });
+                                }
+                                yield like.save();
+                            }
+                            catch (error) {
+                                res.status(500).json(error.message);
                             }
                         }
-                        if (statusUserLiked) {
-                            // DELETE
-                            listUserLike.splice(index, 1);
-                            res.status(200).json('UnLike successfully');
-                        }
-                        else {
-                            like.userId.push(idUserLike);
-                            res.status(200).json('Like successfully');
-                        }
-                        yield like.save();
                     }
-                    let count = listUserLike.length;
-                    res.status(200).json(count);
+                    catch (error) {
+                        res.status(404).json(error.message);
+                    }
                 }
                 else {
                     let like = {
@@ -49,7 +57,7 @@ class likeController {
                         postId: req.params.id
                     };
                     yield like_1.Like.create(like);
-                    return res.status(200).json('Like successfully created');
+                    res.status(200).json('Like successfully created');
                 }
             }
             catch (error) {
