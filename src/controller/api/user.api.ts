@@ -22,15 +22,17 @@ class UserController {
       next(err);
     }
   };
-  
-  getSingleUserByUsername = async (
+
+  getSingleUserByName = async (
     req: Request,
     res: Response,
     next: NextFunction
   ) => {
-    let username = req.query.username;
+    let name = req.query.name;
     try {
-      let user = await User.find({ username: username });
+      let user = await User.find({
+        name: { $regex: `${name}` },
+      });
       if (!user) {
         res.status(404).json();
       } else {
@@ -90,10 +92,8 @@ class UserController {
       res.status(404).json();
     } else {
       let data = req.body;
-      await User.findOneAndUpdate({ _id: id }, data);
-      data._id = id;
-      user = await User.findById(id);
-      res.status(200).json(user);
+      let newUser = await User.findOneAndUpdate({ _id: id }, data);
+      res.status(200).json(newUser);
     }
   };
 }

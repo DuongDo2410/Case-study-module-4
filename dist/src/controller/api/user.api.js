@@ -32,10 +32,12 @@ class UserController {
                 next(err);
             }
         });
-        this.getSingleUserByUsername = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
-            let username = req.query.username;
+        this.getSingleUserByName = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            let name = req.query.name;
             try {
-                let user = yield user_1.User.find({ username: username });
+                let user = yield user_1.User.find({
+                    name: { $regex: `${name}` },
+                });
                 if (!user) {
                     res.status(404).json();
                 }
@@ -95,10 +97,8 @@ class UserController {
             }
             else {
                 let data = req.body;
-                yield user_1.User.findOneAndUpdate({ _id: id }, data);
-                data._id = id;
-                user = yield user_1.User.findById(id);
-                res.status(200).json(user);
+                let newUser = yield user_1.User.findOneAndUpdate({ _id: id }, data);
+                res.status(200).json(newUser);
             }
         });
     }

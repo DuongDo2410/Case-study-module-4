@@ -11,7 +11,8 @@ const routerPost = (0, express_1.Router)();
 // routerPost.use('/comments',routerCommnet)
 //LIKE ROUTER
 // routerPost.use("/likes", routerLike);
-routerPost.get("/getpost", auth_1.auth, post_api_1.default.getPostByUserId);
+routerPost.get("/:id", auth_1.auth, post_api_1.default.getPostByUserId);
+routerPost.get("", auth_1.auth, post_api_1.default.getAll);
 //ADD POST
 routerPost.post("", auth_1.auth, post_api_1.default.newPost);
 //UPDATE POST

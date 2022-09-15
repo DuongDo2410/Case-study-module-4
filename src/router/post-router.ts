@@ -10,19 +10,19 @@ const routerPost = Router();
 
 //LIKE ROUTER
 // routerPost.use("/likes", routerLike);
-routerPost.get("/getpost",auth, postController.getPostByUserId);
+routerPost.get("/:id", auth, postController.getPostByUserId);
+routerPost.get("", auth, postController.getAll);
 
 //ADD POST
-routerPost.post("",auth, postController.newPost);
+routerPost.post("", auth, postController.newPost);
 
 //UPDATE POST
-routerPost.put("/:id",auth, postController.updatePost);
+routerPost.put("/:id", auth, postController.updatePost);
 
 //DELETE POST
-routerPost.delete("/:id",auth, postController.deleteAPost);
+routerPost.delete("/:id", auth, postController.deleteAPost);
 
 //GET POST
 routerPost.get("/:id", postController.getPost);
-
 
 export default routerPost;

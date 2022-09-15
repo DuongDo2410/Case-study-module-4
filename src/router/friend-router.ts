@@ -3,5 +3,9 @@ import friendController from "../controller/api/friend.api";
 import { auth } from "../middleware/auth";
 export const friendRouter = Router();
 friendRouter.use(auth);
-friendRouter.post("/friend/:id", friendController.addFriend);
-
+friendRouter.put("/friend/:id", friendController.updateFriend);
+friendRouter.post("/friend/addFriend", friendController.addFriend);
+friendRouter.get("/friendAccepted", friendController.getAllFriendAccepted);
+friendRouter.get("/friendPendding", friendController.getAllFriendPendding);
+friendRouter.delete("/friend/:id", friendController.deleteFriend);
+friendRouter.get("/friend/checkFriend/:id", friendController.checkFriend);

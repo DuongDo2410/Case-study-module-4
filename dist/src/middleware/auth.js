@@ -8,6 +8,7 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 exports.SECRET_KEY = "1993";
 const auth = (req, res, next) => {
     let authorization = req.headers.authorization;
+    console.log(authorization);
     if (authorization) {
         let accessToken = authorization.split(" ")[1];
         if (!accessToken) {

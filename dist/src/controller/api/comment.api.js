@@ -15,11 +15,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const comment_1 = __importDefault(require("../../model/comment"));
 class commentController {
     constructor() {
+        this.getComment = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let idPost = req.params.id;
+                let comments = yield comment_1.default.find({ postId: idPost });
+                res.status(200).json(comments);
+            }
+            catch (error) {
+                res.status(500).json(error);
+            }
+        });
         this.addComment = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let newComment = req.body;
                 newComment = yield comment_1.default.create(newComment);
-                res.status(200).send(newComment);
+                res.status(200).json(newComment);
             }
             catch (error) {
                 res.status(500).json(error);

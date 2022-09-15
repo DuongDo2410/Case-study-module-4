@@ -16,6 +16,15 @@ const post_1 = __importDefault(require("../../model/post"));
 const validator = require("validator");
 class postController {
     constructor() {
+        this.getAll = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const post = yield post_1.default.find({}).populate("userId");
+                res.status(200).json(post);
+            }
+            catch (error) {
+                res.status(500).json(error);
+            }
+        });
         this.newPost = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let newPost = req.body;
@@ -34,8 +43,7 @@ class postController {
         });
         this.getPostByUserId = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                let userId = req.decoded.id;
-                console.log(userId);
+                let userId = req.params.id;
                 const post = yield post_1.default.find({ userId: userId });
                 res.status(200).json(post);
             }
@@ -47,7 +55,7 @@ class postController {
         this.getAPost = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let id = req.params.id;
-                const post = yield post_1.default.findById(id).populate("user");
+                const post = yield post_1.default.findById(id);
                 res.status(200).json(post);
             }
             catch (error) {
@@ -79,7 +87,7 @@ class postController {
         this.getPost = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let id = req.params.id;
-                const post = yield post_1.default.find({ userId: id });
+                const post = yield post_1.default.findById(id);
                 res.status(200).json(post);
             }
             catch (error) {

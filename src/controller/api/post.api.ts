@@ -4,6 +4,14 @@ import { Request, response, Response } from "express";
 const validator = require("validator");
 
 class postController {
+  getAll = async (req: any, res: Response) => {
+    try {
+      const post = await Post.find({}).populate("userId");
+      res.status(200).json(post);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  };
   newPost = async (req: any, res: Response) => {
     try {
       let newPost = req.body;
@@ -20,11 +28,9 @@ class postController {
   };
 
   getPostByUserId = async (req: any, res: Response) => {
-
     try {
-      let userId = req.decoded.id;
-      console.log(userId)
-      const post = await Post.find({userId:userId});
+      let userId = req.params.id;
+      const post = await Post.find({ userId: userId });
       res.status(200).json(post);
     } catch (error) {
       res.status(500).json(error);
@@ -35,7 +41,7 @@ class postController {
   getAPost = async (req: any, res: Response) => {
     try {
       let id = req.params.id;
-      const post = await Post.findById(id).populate("user");
+      const post = await Post.findById(id);
       res.status(200).json(post);
     } catch (error) {
       res.status(500).json(error);
@@ -65,7 +71,7 @@ class postController {
   getPost = async (req: Request, res: Response) => {
     try {
       let id = req.params.id;
-      const post = await Post.find({ userId: id });
+      const post = await Post.findById(id);
       res.status(200).json(post);
     } catch (error) {
       res.status(500).json(error);

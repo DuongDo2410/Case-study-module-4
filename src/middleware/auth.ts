@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 export const SECRET_KEY = "1993";
 export const auth = (req: any, res: any, next: any) => {
   let authorization = req.headers.authorization;
+  console.log(authorization);
   if (authorization) {
     let accessToken = authorization.split(" ")[1];
     if (!accessToken) {

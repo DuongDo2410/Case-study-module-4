@@ -1,11 +1,21 @@
 import { Request, Response } from 'express';
 import Comment from '../../model/comment';
 class commentController {
+    getComment = async (req: Request, res:Response)=>{
+        try {
+         let idPost = req.params.id;
+         let comments= await Comment.find({postId:idPost});
+         res.status(200).json(comments);
+        } catch (error) {
+         res.status(500).json(error);
+        }
+     }
     addComment = async (req: Request, res:Response)=>{
        try {
         let newComment = req.body;
+
         newComment= await Comment.create(newComment);
-        res.status(200).send(newComment);
+        res.status(200).json(newComment);
        } catch (error) {
         res.status(500).json(error);
        }

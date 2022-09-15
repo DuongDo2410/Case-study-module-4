@@ -12,15 +12,21 @@ const userSchema = new mongoose_1.Schema({
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
     password: {
         type: String,
-        required: true
+        required: true,
     },
     name: String,
     dob: String,
     avatar: String,
+    friend: [
+        {
+            type: mongoose_1.Schema.Types.ObjectId,
+            ref: "Friend",
+        },
+    ],
 });
-const User = (0, mongoose_1.model)('User', userSchema);
+const User = (0, mongoose_1.model)("User", userSchema);
 exports.User = User;

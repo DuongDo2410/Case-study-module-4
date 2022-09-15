@@ -6,7 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const comment_api_1 = __importDefault(require("../controller/api/comment.api"));
 const routerCommnet = require('express').Router();
 //  ADD COMMENT
-routerCommnet.post('/:id', comment_api_1.default.addComment);
+routerCommnet.post('', comment_api_1.default.addComment);
+routerCommnet.get('/:id', comment_api_1.default.getComment);
 //UPDATE COMMENT
 routerCommnet.put('/:id', comment_api_1.default.updateComment);
 //DELETE COMMENT
