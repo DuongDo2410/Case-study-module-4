@@ -22,11 +22,17 @@ class FriendController {
             res.status(200).json();
         });
         this.getAllFriendAccepted = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            let friend = yield friend_1.Friend.find({ status: "accept" }).populate("idfriend");
+            let friend = yield friend_1.Friend.find({
+                iduser: req.decoded.id,
+                status: "accept",
+            }).populate("idfriend");
             res.status(200).json(friend);
         });
         this.getAllFriendPendding = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            let friend = yield friend_1.Friend.find({ status: "pendding" }).populate("idfriend");
+            let friend = yield friend_1.Friend.find({
+                iduser: req.decoded.id,
+                status: "pendding",
+            }).populate("idfriend");
             res.status(200).json(friend);
         });
         this.deleteFriend = (req, res) => __awaiter(this, void 0, void 0, function* () {

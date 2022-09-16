@@ -23,10 +23,6 @@ const postSchema = new Schema({
     status:{
         type: String,
     },
-    like :[{
-        type: Schema.Types.ObjectId,
-        ref:'User'
-    }]
 
 }, { timestamps: true })
 

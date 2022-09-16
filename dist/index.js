@@ -15,7 +15,7 @@ const app = (0, express_1.default)();
 dotenv_1.default.config();
 app.use((0, cors_1.default)());
 // connection
-const DB_URL = `${process.env.APP_HOST}://${process.env.DATABASE_HOST}:${process.env.DATABASE_PORT}/${process.env.DATABASE_NAME}`;
+const DB_URL = process.env.DATABASE_MONGO ? process.env.DATABASE_MONGO : "";
 mongoose_1.default.connect(DB_URL).then(() => {
     console.log("DB Connected");
 });

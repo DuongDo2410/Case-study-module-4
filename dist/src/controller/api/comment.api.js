@@ -38,7 +38,7 @@ class commentController {
         this.updateComment = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let id = req.params.id;
-                let updateComment = yield comment_1.default.findOneAndUpdate({ postId: id }, { $set: req.body });
+                let updateComment = yield comment_1.default.findOneAndUpdate({ id: id }, { $set: req.body });
                 res.status(200).json(updateComment);
             }
             catch (error) {

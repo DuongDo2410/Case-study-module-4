@@ -1,10 +1,8 @@
 import { Router } from "express";
-import postController from "../controller/api/post.api";
-import routerLike from "./like-router";
 import { auth } from "../middleware/auth";
-
-const routerPost = Router();
-
+import postController from "../controller/api/post.api";
+import routerCommnet from "./comment-router";
+const routerPost = require("express").Router();
 //COMMENT ROUTER
 // routerPost.use('/comments',routerCommnet)
 
